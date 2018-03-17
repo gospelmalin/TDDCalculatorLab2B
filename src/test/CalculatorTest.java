@@ -135,6 +135,45 @@ class CalculatorTest {
 			// Assert
 			assertEquals(3.0d, actual, 0.111); // TODO vettigare testvärden, använda parameters?
 	}
+	
+	@Test //TODO need to check all values, use parameters?
+	void shouldCheckThatValueIsAnOperatorIsTrue() {
+		// Arrange
+			 	Calculator calc = new Calculator();
+			 // Act
+				String stringToTest="+";
+			 // Assert
+			 assertTrue(calc.isOperator(stringToTest)); 
+	}
+	
+	@Test
+	void shouldCheckThatValueIsAnOperatorIsTrueFalse() {
+		// Arrange
+	 	Calculator calc = new Calculator();
+		// Act
+		String stringToTest ="a";
+		// Assert
+		assertFalse(calc.isOperator(stringToTest)); 
+	}
 
+	@Test //TODO need to check all values, use parameters?
+	void shouldCheckThatOperatorHasPriorityIsTrue() {
+		// Arrange
+	 	Calculator calc = new Calculator();
+	 // Act
+		String operator="*";
+	 // Assert
+	 assertTrue(calc.operatorHasPriority(operator)); 
+	}
 
+	@Test //TODO need to check all values, use parameters?
+	void shouldCheckThatOperatorHasPriorityIsFalse() {
+		// Arrange
+	 	Calculator calc = new Calculator();
+	 // Act
+		String operator="-";
+	 // Assert
+	 assertFalse(calc.operatorHasPriority(operator)); 
+	}
+	
 }

@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.function.BooleanSupplier;
 
 public class Calculator {
 	
@@ -69,4 +70,24 @@ public class Calculator {
 			return numberFromString;
 		}
 
+		public boolean operatorHasPriority(String operator) {
+			if (operator.toString().equals("*") || operator.toString().equals("/") || operator.toString().equals("%")) {
+				return true;
+			}
+			
+			return false;
+		}
+
+		public boolean isOperator(String operatorToTest) {
+			if (operatorToTest.toString().equals("*") || operatorToTest.toString().equals("/") 
+					|| operatorToTest.toString().equals("%") || operatorToTest.toString().equals("-")
+					|| operatorToTest.toString().equals("+")) {
+				return true;
+			}
+			
+			return false;
+		}
+
+		
+		
 }
