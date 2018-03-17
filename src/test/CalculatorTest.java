@@ -55,4 +55,71 @@ class CalculatorTest {
 			assertFalse (calc.checkIfNumber("+"));
 	}
 	
+	@Test
+	void shouldMultiplyTwoValuesGiven() {
+
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		// Act
+		double actual = calc.multiply(3,2);
+		
+		// Assert
+		assertEquals(6d, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+	}
+
+	@Test
+	void shouldDivideTheFirstValueWithTheSecond() {
+		// fail("Not yet implemented"); // TODO 
+		// Arrange
+			Calculator calc = new Calculator();
+				
+		// Act
+			double actual = calc.divide(3,2);
+
+				
+		// Assert
+			assertEquals(1.5, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+		
+	}
+	
+	@Test
+	void shouldSubtractTheSecondValueGivenFromTheFirst() {
+		// fail("Not yet implemented"); // TODO
+		
+		// Arrange
+			Calculator calc = new Calculator();
+				
+		// Act
+			double actual = calc.subtract(5,2.5);
+				
+		// Assert
+			assertEquals(2.5, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+	}
+	
+	@Test
+	void shouldAddTwoValuesGiven() {
+		// fail("Not yet implemented"); //TODO
+		// Arrange
+			Calculator calc = new Calculator();
+						
+		// Act
+			double actual = calc.add(5,2.5);
+						
+		// Assert
+			assertEquals(7.5, actual, 0.111); // TODO vettigare testvärden, använda parameters?	
+	}
+	
+	@Test
+	void shouldGiveModulusFromTheDivision() {
+		// fail("Not yet implemented"); // TODO
+		// Arrange
+			Calculator calc = new Calculator();
+								
+		// Act
+			double actual = calc.modulus(14,5);
+								
+		// Assert
+			assertEquals(4, actual, 0.111); // TODO vettigare testvärden, använda parameters?	
+			}
 }

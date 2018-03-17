@@ -39,4 +39,29 @@ public class Calculator {
 		return true;
 	}
 
+	public double multiply(double a, double b) {
+		return a * b;
+		}
+
+		public double divide(double a, double b) {
+			if (b == 0) {
+			//	return 0; // TODO replace with better solution
+			    throw new ArithmeticException("Division with 0 is not allowed");
+			 }
+			return a / b;
+		}
+
+		public double subtract(double a, double b) {
+			return a - b;
+		}
+
+		public double add(double a, double b) {
+			return a + b;
+		}
+
+		public double modulus(double a, double b) {
+			// TODO kan man ha double på indata här eller blir det fel?
+			return a % b;
+		}
+
 }
