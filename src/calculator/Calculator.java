@@ -88,6 +88,23 @@ public class Calculator {
 			return false;
 		}
 
+		public double performCalculation(double leftOperand, double rightOperand, String operator) {
+			switch (operator) {
+			case "+":
+				return add(leftOperand, rightOperand);
+			case "-":
+				return subtract(leftOperand, rightOperand);
+			case "*":
+				return multiply(leftOperand, rightOperand);
+			case "/":
+				return divide(leftOperand, rightOperand);
+			case "%":
+				return modulus(leftOperand, rightOperand);
+			default:
+				return 0;
+			}
+		}
+
 		
 		
 }

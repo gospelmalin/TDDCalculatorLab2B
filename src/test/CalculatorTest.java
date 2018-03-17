@@ -176,4 +176,64 @@ class CalculatorTest {
 	 assertFalse(calc.operatorHasPriority(operator)); 
 	}
 	
+	@Test
+	void shouldPerformCalculationToAddTwoValuesGiven() {
+		//fail("Not yet implemented"); // TODO
+		// Arrange
+		Calculator calc = new Calculator();
+		double expected = 40.6;
+		// Act
+		double actual = calc.performCalculation(30.2, 10.4, "+");
+		// Assert
+		assertEquals(expected, actual, 0.111);
+	}
+
+	@Test
+	void shouldPerformCalculationToSubtractSecondValueFromFirst() {
+		//fail("Not yet implemented"); // TODO
+		// Arrange
+		Calculator calc = new Calculator();
+		double expected = 20.4;
+		// Act
+		double actual = calc.performCalculation(30.8, 10.4, "-");
+		// Assert
+		assertEquals(expected, actual, 0.111);
+	}
+	
+	@Test
+	void shouldPerformCalculationToMultiplyTwoValues() {
+		//fail("Not yet implemented"); // TODO
+		// Arrange
+		Calculator calc = new Calculator();
+		double expected = 48;
+		// Act
+		double actual = calc.performCalculation(6.0, 8, "*");
+		// Assert
+		assertEquals(expected, actual, 0.111);
+	}
+	
+	@Test
+	void shouldPerformCalculationToDivideTheFirstValueWithTheSecond() {
+		//fail("Not yet implemented"); // TODO
+		// Arrange
+		Calculator calc = new Calculator();
+		double expected = 2;
+		// Act
+		double actual = calc.performCalculation(8.0, 4, "/");
+		// Assert
+		assertEquals(expected, actual, 0.111);
+	}
+	
+	@Test
+	void shouldPerformCalculationToGiveModulus() {
+		//fail("Not yet implemented"); // TODO
+		// Arrange
+		Calculator calc = new Calculator();
+		double expected = 2;
+		// Act
+		double actual = calc.performCalculation(8.0, 3, "%");
+		// Assert
+		assertEquals(expected, actual, 0.111);
+	}
+	
 }
