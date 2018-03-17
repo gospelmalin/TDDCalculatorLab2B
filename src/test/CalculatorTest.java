@@ -55,6 +55,7 @@ class CalculatorTest {
 			assertFalse (calc.checkIfNumber("+"));
 	}
 	
+	// TODO testa specialfall och gränsvärden för beräkningarna
 	@Test
 	void shouldMultiplyTwoValuesGiven() {
 
@@ -122,4 +123,18 @@ class CalculatorTest {
 		// Assert
 			assertEquals(4, actual, 0.111); // TODO vettigare testvärden, använda parameters?	
 			}
+
+	@Test
+	void shouldConvertDigitsInStringToNumbers() { // testa att jag kan konvertera en sträng till ett tal
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act
+			double actual = calc.convertDigitsInStringToNumbers("3.0");
+			
+			// Assert
+			assertEquals(3.0d, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+	}
+
+
 }

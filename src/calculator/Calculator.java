@@ -64,4 +64,9 @@ public class Calculator {
 			return a % b;
 		}
 
+		public double convertDigitsInStringToNumbers(String stringDigit) {
+			Double numberFromString = Double.parseDouble(stringDigit);
+			return numberFromString;
+		}
+
 }
