@@ -105,6 +105,22 @@ public class Calculator {
 			}
 		}
 
+
+		public ArrayList<String> replaceOperandBeforeOperatorInInfixArrayListWithResult(int operatorPosition, String result) {
+			infixArrayList.set((operatorPosition-1), result);
+			return infixArrayList;
+		}
+
+		public ArrayList<String> removeOperatorAndOperandAfterFromInfixArrayList(int operatorPosition) {
+			infixArrayList.remove(operatorPosition+1);
+			infixArrayList.remove(operatorPosition);
+			return infixArrayList;
+		}
+
+
+
+
+
 		
 		
 }

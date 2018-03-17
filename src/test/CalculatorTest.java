@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import calculator.Calculator;
@@ -176,9 +177,8 @@ class CalculatorTest {
 	 assertFalse(calc.operatorHasPriority(operator)); 
 	}
 	
-	@Test
+	@Test //TODO kontrollera gränsfall, special cases
 	void shouldPerformCalculationToAddTwoValuesGiven() {
-		//fail("Not yet implemented"); // TODO
 		// Arrange
 		Calculator calc = new Calculator();
 		double expected = 40.6;
@@ -188,9 +188,8 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 
-	@Test
+	@Test //TODO kontrollera gränsfall, special cases
 	void shouldPerformCalculationToSubtractSecondValueFromFirst() {
-		//fail("Not yet implemented"); // TODO
 		// Arrange
 		Calculator calc = new Calculator();
 		double expected = 20.4;
@@ -200,9 +199,8 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
-	@Test
+	@Test //TODO kontrollera gränsfall, special cases
 	void shouldPerformCalculationToMultiplyTwoValues() {
-		//fail("Not yet implemented"); // TODO
 		// Arrange
 		Calculator calc = new Calculator();
 		double expected = 48;
@@ -212,9 +210,8 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
-	@Test
+	@Test //TODO kontrollera gränsfall, special cases //TODO division with 0
 	void shouldPerformCalculationToDivideTheFirstValueWithTheSecond() {
-		//fail("Not yet implemented"); // TODO
 		// Arrange
 		Calculator calc = new Calculator();
 		double expected = 2;
@@ -224,9 +221,8 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
-	@Test
+	@Test //TODO kontrollera gränsfall, special cases
 	void shouldPerformCalculationToGiveModulus() {
-		//fail("Not yet implemented"); // TODO
 		// Arrange
 		Calculator calc = new Calculator();
 		double expected = 2;
@@ -235,5 +231,64 @@ class CalculatorTest {
 		// Assert
 		assertEquals(expected, actual, 0.111);
 	}
+	
+	@Test
+	void shouldReplaceOperandBeforeOperatorInInfixArrayListWithResult() {
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		// For equation 2.0+3.0*4
+		calc.infixArrayList.add("2.0");
+		calc.infixArrayList.add("+");
+		calc.infixArrayList.add("3.0");
+		calc.infixArrayList.add("*");
+		calc.infixArrayList.add("4");
+
+		ArrayList<String> expectedArray = new ArrayList<String>();
+		expectedArray.add("2.0");
+		expectedArray.add("+");
+		expectedArray.add("5.0");
+		expectedArray.add("*");
+		expectedArray.add("4");
+
+		// Act
+		String result="5.0";
+		int operatorPosition = 3;
+		ArrayList<String> resultArray = calc.replaceOperandBeforeOperatorInInfixArrayListWithResult(operatorPosition, result);
+				
+		// Assert
+		assertEquals(expectedArray, resultArray);
+	}
+	
+	@Test
+	void shouldRemoveOperatorAndOperandAfterFromInfixArrayList() {
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		// For equation 2.0+3.0*4-2
+		calc.infixArrayList.add("2.0");
+		calc.infixArrayList.add("+");
+		calc.infixArrayList.add("3.0");
+		calc.infixArrayList.add("*");
+		calc.infixArrayList.add("4");
+		calc.infixArrayList.add("-");
+		calc.infixArrayList.add("2");
+
+		ArrayList<String> expectedArray = new ArrayList<String>();
+		expectedArray.add("2.0");
+		expectedArray.add("+");
+		expectedArray.add("3.0");
+		expectedArray.add("-");
+		expectedArray.add("2");
+
+		// Act
+		int operatorPosition = 3;
+		ArrayList<String> resultArray = calc.removeOperatorAndOperandAfterFromInfixArrayList(operatorPosition);
+				
+		// Assert
+		assertEquals(expectedArray, resultArray);
+	}
+	
+
 	
 }
