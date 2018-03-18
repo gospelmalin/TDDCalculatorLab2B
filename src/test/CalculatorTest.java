@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import calculator.Calculator;
@@ -233,6 +232,54 @@ class CalculatorTest {
 	}
 	
 	@Test
+	void shouldFindOperandBeforeTheOperator() {
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		// For equation 2.0+3.0*4-2
+		calc.infixArrayList.add("2.0");
+		calc.infixArrayList.add("+");
+		calc.infixArrayList.add("3.0");
+		calc.infixArrayList.add("*");
+		calc.infixArrayList.add("4");
+		calc.infixArrayList.add("-");
+		calc.infixArrayList.add("2");
+
+		String expectedLeftOperand = "3.0";
+
+		// Act
+		int operatorPosition = 3;
+		String actualLeftOperand = calc.findOperandBeforeTheOperator(operatorPosition);	
+		
+		// Assert
+		assertEquals(expectedLeftOperand, actualLeftOperand);
+	}
+	
+	@Test
+	void shouldFindOperandAfterTheOperator() {
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		// For equation 2.0+3.0*4-2
+		calc.infixArrayList.add("2.0");
+		calc.infixArrayList.add("+");
+		calc.infixArrayList.add("3.0");
+		calc.infixArrayList.add("*");
+		calc.infixArrayList.add("4");
+		calc.infixArrayList.add("-");
+		calc.infixArrayList.add("2");
+
+		String expectedRightOperand = "4";
+
+		// Act
+		int operatorPosition = 3;
+		String actualRightOperand = calc.findOperandAfterTheOperator(operatorPosition);	
+		
+		// Assert
+		assertEquals(expectedRightOperand, actualRightOperand);
+	}
+	
+	@Test
 	void shouldReplaceOperandBeforeOperatorInInfixArrayListWithResult() {
 		// Arrange
 		Calculator calc = new Calculator();
@@ -289,6 +336,140 @@ class CalculatorTest {
 		assertEquals(expectedArray, resultArray);
 	}
 	
+	@Test
+//something not good enough within method, makes test halt
+	void shouldReturnCorrectResultOfSimpleExpressionWithNonPrioOperator() {
+		// Arrange
+				Calculator calc = new Calculator();
+				
+				// For equation 2.0+3.0-2
+				String expected="3.0";
 
+				// Act
+				String equationEntered="2.0+3.0-2";
+				String result = calc.calculateExpression(equationEntered);
+						
+				// Assert
+				assertEquals(expected, result);
+	}
+	
+	@Test
+	void shouldReturnCorrectResultOfSimpleExpressionWithPrioOperator() {
+		// Arrange
+				Calculator calc = new Calculator();
+				
+				// For equation 2.0*3.0*2
+				String expected="3.0";
+
+				// Act
+				String equationEntered="2.0*3.0/2";
+				String result = calc.calculateExpression(equationEntered);
+						
+				// Assert
+				assertEquals(expected, result);
+	}
+	
+	@Test
+	void shouldReturnCorrectResultOfExpressionWithBothPrioAndNonPrioOperator() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// For equation 2.0+3.0*4/2-1
+			String expected="7.0";
+
+			// Act
+			String equationEntered="2.0+3.0*4/2-1";
+			String result = calc.calculateExpression(equationEntered);
+					
+			// Assert
+			assertEquals(expected, result);
+	}
+	
+	
+	@Test
+	void shouldReturnCorrectResultOfComplicatedExpressionWithBothPrioAndNonPrioOperator() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// For equation 2+4-2+2*8-4/2
+			String expected="18.0";
+
+			// Act
+			String equationEntered="2+4-2+2*8-4/2";
+			String result = calc.calculateExpression(equationEntered);
+					
+			// Assert
+			assertEquals(expected, result);
+	}
+	
+	
+	@Test
+	void shouldCheckIfAnyPrioOperatorsIsTrue() { // will pass if turns out true
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		ArrayList<String> testArrayList = new ArrayList<String>();
+		// For equation 2.0+3.0*4-2/2
+				testArrayList.add("2.0");
+				testArrayList.add("+");
+				testArrayList.add("3.0");
+				testArrayList.add("*");
+				testArrayList.add("4");
+				testArrayList.add("-");
+				testArrayList.add("2");
+				testArrayList.add("/");
+				testArrayList.add("2");
+
+		// Act/Assert
+		assertTrue (calc.checkIfAnyPrioOperators(testArrayList));
+
+}
+
+	@Test
+	void shouldCheckIfAnyPrioOperatorsIsFalse() { // will pass if turns out false
+	// Arrange
+		Calculator calc = new Calculator();
+		
+		ArrayList<String> testArrayList = new ArrayList<String>();
+		// For equation 2.0+3.0+4-2-2
+				testArrayList.add("2.0");
+				testArrayList.add("+");
+				testArrayList.add("3.0");
+				testArrayList.add("+");
+				testArrayList.add("4");
+				testArrayList.add("-");
+				testArrayList.add("2");
+				testArrayList.add("-");
+				testArrayList.add("2");
+		// Act/Assert
+		assertFalse (calc.checkIfAnyPrioOperators(testArrayList));
+}
+	
+	@Test
+	void shouldFindFirstPrioOperator() {
+		// Arrange
+			Calculator calc = new Calculator();
+				
+			ArrayList<String> testArrayList = new ArrayList<String>();
+			// For equation 2.0+3.0*4-2/2*3
+					testArrayList.add("2.0");
+					testArrayList.add("+");
+					testArrayList.add("3.0");
+					testArrayList.add("*");
+					testArrayList.add("4");
+					testArrayList.add("-");
+					testArrayList.add("2");
+					testArrayList.add("/");
+					testArrayList.add("2");
+					testArrayList.add("+");
+					testArrayList.add("3");
+				
+				int expectedIndex=3;
+			// Act
+			int resultIndex = calc.findFirstPrioOperator(testArrayList);
+			
+			// Assert
+			assertEquals(expectedIndex, resultIndex); 
+		}
 	
 }
