@@ -12,90 +12,52 @@ public class Calculator {
 	}
 
 	public String calculateExpression(String equationEntered) {
-		infixArrayList = createInfixArrayListFromString(equationEntered);
-		System.out.println("Now handling equation: " + equationEntered);
-		while (infixArrayList.size()> 1) {
-			// Block for equations with prio operators included
-			if (checkIfAnyPrioOperators(infixArrayList)) {
-				
-				for (int i=1; i <infixArrayList.size(); i++) { //TODO invalid character?
-					// Block for prio operators
-					i = findFirstPrioOperator(infixArrayList);
-					if (operatorHasPriority(infixArrayList.get(i)) && infixArrayList.size() - 1 != i) { 
-						
-					System.out.println("Prio operators in equation. Entered Priority if");
-						
-						double leftOperand = Double.parseDouble(findOperandBeforeTheOperator(i));
-						double rightOperand = Double.parseDouble(findOperandAfterTheOperator(i));
-						String operator = infixArrayList.get(i);
-	
-						double resultFromCalculation = performCalculation(leftOperand, rightOperand, operator);
-						String result= Double.toString(resultFromCalculation);
-					
-						replaceOperandBeforeOperatorInInfixArrayListWithResult(i, result);
-						removeOperatorAndOperandAfterFromInfixArrayList(i);
-							for (String valueInInfix : infixArrayList) {
-								System.out.println("Infix values after priority calculation: " +valueInInfix); 
-							} //end printout loop for result of prio operators block
-						i++;
-						infixArrayList.trimToSize();
-					}//end if for prio operators
-				//}	//end for block for prio operators in having prio block
-				
-				//for (int i1=1; i1 <infixArrayList.size(); i1++) {
-					// Block for nonprio operators
-					else if (!operatorHasPriority(infixArrayList.get(i)) && infixArrayList.size() - 1 != i) { 
-						System.out.println("Prio operators in equation handled. Now Entered non-priority if.");
-						
-						double leftOperand = Double.parseDouble(findOperandBeforeTheOperator(i));
-						double rightOperand = Double.parseDouble(findOperandAfterTheOperator(i));
-						String operator = infixArrayList.get(i);
-	
-						double resultFromCalculation = performCalculation(leftOperand, rightOperand, operator);
-						String result= Double.toString(resultFromCalculation);
-					
-						replaceOperandBeforeOperatorInInfixArrayListWithResult(i, result);
-						removeOperatorAndOperandAfterFromInfixArrayList(i);
-							for (String valueInInfix : infixArrayList) {
-								System.out.println("Prio operators in equation. Infix values after non priority calculation: " +valueInInfix); 
-							} //end printout loop for result of NO-prio operators block within block WITH prio operators
-						i++;
-						infixArrayList.trimToSize();
-					} //end if for non-prio operators within block WITH prio operators	
-				//} //End for loop in block with prio operators included
-			} // End outer if for block with prio operators included
-			}
-			// Block for equations with NO prio operators included
-			if (!checkIfAnyPrioOperators(infixArrayList)) {
-				for (int j=1; j <infixArrayList.size(); j++) { //TODO invalid character?
-					// Block for nonprio operators
-					if (!operatorHasPriority(infixArrayList.get(j)) && infixArrayList.size() - 1 != j) { 
-						System.out.println("No prio operators in equation: Entered non-priority if.");
-						
-						double leftOperand = Double.parseDouble(findOperandBeforeTheOperator(j));
-						double rightOperand = Double.parseDouble(findOperandAfterTheOperator(j));
-						String operator = infixArrayList.get(j);
-	
-						double resultFromCalculation = performCalculation(leftOperand, rightOperand, operator);
-						String result= Double.toString(resultFromCalculation);
-					
-						replaceOperandBeforeOperatorInInfixArrayListWithResult(j, result);
-						removeOperatorAndOperandAfterFromInfixArrayList(j);
-							for (String valueInInfix : infixArrayList) {
-								System.out.println("Infix values after non priority calculation: " +valueInInfix); 
-							} //end printout loop for result of NO-prio operators block
-						j++;
-						infixArrayList.trimToSize();
-					} //end if for non-prio operators	
-				} // end for block for equation with NO prio operators included
-			 }	//end outer if block for equation with NO prio operators included
-		}	//End while	
-		if (infixArrayList.size()==1);
-		String result = infixArrayList.get(0);
-		return result;
+
+	    infixArrayList = createInfixArrayListFromString(equationEntered);
+
+	    System.out.println("Now handling equation: " + equationEntered);
+
+	    // As long as we have any prio operators
+	    while (checkIfAnyPrioOperators(infixArrayList)) {
+	        int i = findFirstPrioOperator(infixArrayList);
+
+	        double leftOperand = Double.parseDouble(findOperandBeforeTheOperator(i));
+	        double rightOperand = Double.parseDouble(findOperandAfterTheOperator(i));
+	        String operator = infixArrayList.get(i);
+
+	        double resultFromCalculation = performCalculation(leftOperand, rightOperand, operator);
+	        String result= Double.toString(resultFromCalculation);
+
+	        replaceOperandBeforeOperatorInInfixArrayListWithResult(i, result);
+	        removeOperatorAndOperandAfterFromInfixArrayList(i);
+	        infixArrayList.trimToSize();
+	    }
+
+	    // As long as we have no prio operators
+	    while (checkIfAnyNonPrioOperators(infixArrayList))
+	    {
+	        int i = findFirstNonPrioOperator(infixArrayList);
+
+	        double leftOperand = Double.parseDouble(findOperandBeforeTheOperator(i));
+	        double rightOperand = Double.parseDouble(findOperandAfterTheOperator(i));
+	        String operator = infixArrayList.get(i);
+
+	        double resultFromCalculation = performCalculation(leftOperand, rightOperand, operator);
+	        String result= Double.toString(resultFromCalculation);
+
+	        replaceOperandBeforeOperatorInInfixArrayListWithResult(i, result);
+	        removeOperatorAndOperandAfterFromInfixArrayList(i);
+	        infixArrayList.trimToSize();
+	    }
+
+	    String result = infixArrayList.get(0);
+
+	    return result;
+
 	} //end method
 	
-		
+	
+	
 
 	public ArrayList<String> createInfixArrayListFromString(String expressionToCalculate) {
 			String infixArray[] = expressionToCalculate.split("[^/*\\-+%0-9\\.]+|(?<=[/*\\-+%])(?=[0-9])|(?<=[0-9])(?=[/*\\-+%])");
@@ -233,6 +195,34 @@ public class Calculator {
 					}			
 			} int firstPrioOperatorIndex = operatorIndexArrayList.get(0);
 			return firstPrioOperatorIndex;
+		}
+
+		public boolean checkIfAnyNonPrioOperators(ArrayList<String> testArrayList) {
+			infixArrayList = testArrayList;
+			for (String optionalOperator : infixArrayList) {
+				if (!checkIfNumber(optionalOperator)) {
+					for (int i = 0; i < infixArrayList.size(); i++) {
+						if (isOperator(optionalOperator) && !operatorHasPriority(optionalOperator)) {
+						return true;
+						}
+					}
+				//	return false;
+				}
+			}
+			return false;		
+		}
+
+		public int findFirstNonPrioOperator(ArrayList<String> testArrayList) {
+			infixArrayList = testArrayList;
+			ArrayList<Integer> operatorIndexArrayList = new ArrayList<Integer>();
+				for (String operator : infixArrayList) {
+					if (isOperator(operator) && !operatorHasPriority(operator)) {
+					int	operatorIndex=infixArrayList.indexOf(operator);
+					// System.out.println(operator + " " + operatorIndex ); //For testing purposes only
+					operatorIndexArrayList.add(operatorIndex);
+					}			
+			} int firstNonPrioOperatorIndex = operatorIndexArrayList.get(0);
+			return firstNonPrioOperatorIndex;
 		}
 	
 		
