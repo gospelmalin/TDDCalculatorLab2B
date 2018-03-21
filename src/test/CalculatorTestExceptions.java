@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 import calculator.Calculator;
+
 /**
  * The class CalculatorTestExceptions holds the unit tests on exception handling.
  * @author Malin Albinsson
@@ -19,6 +20,9 @@ import calculator.Calculator;
 class CalculatorTestExceptions {
 	
 
+	/**
+	 * Divide by zero test.
+	 */
 	@Test	
 	void divideByZeroTest() {
 	Calculator calc = new Calculator();
@@ -26,9 +30,13 @@ class CalculatorTestExceptions {
 	}
 
 	
-	 @Rule
+	 /** The thrown. */
+ 	@Rule
 	    public ExpectedException thrown = ExpectedException.none();
 
+	/**
+	 * Test check if number throws number format exception.
+	 */
 	@Test //
 	    public void testCheckIfNumberThrowsNumberFormatException() {
 		Calculator calc = new Calculator();
@@ -40,6 +48,9 @@ class CalculatorTestExceptions {
 	
 	
 	
+	/**
+	 * Should throw arithmetic exception message when division with 0.
+	 */
 	@Test
 	void shouldThrowArithmeticExceptionMessageWhenDivisionWith0() {
 		//Arrange
@@ -52,6 +63,9 @@ class CalculatorTestExceptions {
     }
 	
 	
+	/**
+	 * Should throw arithmetic exception when division with 0.
+	 */
 	@Test
 	public void shouldThrowArithmeticExceptionWhenDivisionWith0_() {
 		Calculator calc = new Calculator();
@@ -62,6 +76,9 @@ class CalculatorTestExceptions {
 	}
 
 
+	/**
+	 * Should throw arithmetic exception when overflow when adding.
+	 */
 	@Test
 	void shouldThrowArithmeticExceptionWhenOverflowWhenAdding() {
 
@@ -74,6 +91,9 @@ class CalculatorTestExceptions {
 
 	}
 	
+	/**
+	 * Should throw arithmetic exception when underflow when subtracting.
+	 */
 	@Test 
 	void shouldThrowArithmeticExceptionWhenUnderflowWhenSubtracting() {
 
@@ -85,6 +105,9 @@ class CalculatorTestExceptions {
 
 	}
 	
+	/**
+	 * Should throw arithmetic exception message when underflow when subtracting.
+	 */
 	@Test 
 	void shouldThrowArithmeticExceptionMessageWhenUnderflowWhenSubtracting() {
 
@@ -101,6 +124,9 @@ class CalculatorTestExceptions {
 	    }
 		
 	
+	/**
+	 * Should throw arithmetic exception when underflow when dividing.
+	 */
 	@Test  //underflow 4.9E-324
 	void shouldThrowArithmeticExceptionWhenUnderflowWhenDividing() {
 
@@ -113,6 +139,9 @@ class CalculatorTestExceptions {
 
 	}
 	
+	/**
+	 * Should throw arithmetic exception message when underflow when dividing.
+	 */
 	@Test 
 	void shouldThrowArithmeticExceptionMessageWhenUnderflowWhenDividing() {
 
@@ -128,6 +157,9 @@ class CalculatorTestExceptions {
 	        assertEquals("Underflow exception", exception.getMessage());
 	    }
 	
+	/**
+	 * Should throw arithmetic exception when overflow when multiplying.
+	 */
 	@Test
 	void shouldThrowArithmeticExceptionWhenOverflowWhenMultiplying() {
 
@@ -141,7 +173,10 @@ class CalculatorTestExceptions {
 	}
 	
 
-	@Test //empty string
+	/**
+	 * Should throw illegal argument exception message when string is empty.
+	 */
+	@Test 
 	void shouldThrowIllegalArgumentExceptionMessageWhenStringIsEmpty() {
 		//Arrange
 				Calculator calc = new Calculator();
@@ -152,7 +187,10 @@ class CalculatorTestExceptions {
         assertEquals("Equation has no content.", exception.getMessage());
     }
 	
-	@Test //NotStartWithNumber
+	/**
+	 * Should throw illegal argument exception message when string does not start with number.
+	 */
+	@Test 
 	void shouldThrowIllegalArgumentExceptionMessageWhenStringDoesNotStartWithNumber() {
 		//Arrange
 				Calculator calc = new Calculator();
@@ -163,7 +201,10 @@ class CalculatorTestExceptions {
         assertEquals("Equation does not start with a digit.", exception.getMessage());
     }
 	
-	@Test //NotEndWithNumber
+	/**
+	 * Should throw illegal argument exception message when string does not end with number.
+	 */
+	@Test 
 	void shouldThrowIllegalArgumentExceptionMessageWhenStringDoesNotEndWithNumber() {
 		//Arrange
 				Calculator calc = new Calculator();
@@ -174,18 +215,24 @@ class CalculatorTestExceptions {
         assertEquals("Equation does not end with a digit.", exception.getMessage());
     }
 	
-	@Test //several operators
-	void shouldThrowIllegalArgumentExceptionMessageWhenMoreThanOneConsequtiveOperator() {
+	/**
+	 * Should throw illegal argument exception message when more than one consecutive operator.
+	 */
+	@Test 
+	void shouldThrowIllegalArgumentExceptionMessageWhenMoreThanOneConsecutiveOperator() {
 		//Arrange
 				Calculator calc = new Calculator();
 							
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
         	calc.calculateExpression("5++4");
            });
-        assertEquals("Several consequtive operators in the equation.", exception.getMessage());
+        assertEquals("Several consecutive operators in the equation.", exception.getMessage());
     }
 	
-	@Test //Whitespace
+	/**
+	 * Should throw illegal argument exception message when whitespace in the equation.
+	 */
+	@Test
 	void shouldThrowIllegalArgumentExceptionMessageWhenWhitespaceInTheEquation() {
 		//Arrange
 				Calculator calc = new Calculator();
@@ -196,7 +243,10 @@ class CalculatorTestExceptions {
         assertEquals("Whitespace present in the equation.", exception.getMessage());
     }
 	
-	@Test //NotEndWithNumber
+	/**
+	 * Should throw illegal argument exception message when non valid content in equation.
+	 */
+	@Test 
 	void shouldThrowIllegalArgumentExceptionMessageWhenNonValidContentInEquation() {
 		//Arrange
 				Calculator calc = new Calculator();

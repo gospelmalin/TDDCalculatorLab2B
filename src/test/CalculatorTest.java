@@ -919,7 +919,7 @@ class CalculatorTest {
 	}
 	
 	/**
-	 * Should check if several consequtive operators is true.
+	 * Should check if several consecutive operators is true.
 	 */
 	@Test
 	void shouldCheckIfSeveralConsequtiveOperatorsIsTrue() {
@@ -927,11 +927,11 @@ class CalculatorTest {
 			Calculator calc = new Calculator();
 			
 			// Act/Assert
-			assertTrue (calc.severalConsequtiveOperators("3.91+4*%2"));
+			assertTrue (calc.severalConsecutiveOperators("3.91+4*%2"));
 	}
 	
 	/**
-	 * Should check if several consequtive operators is false.
+	 * Should check if several consecutive operators is false.
 	 */
 	@Test
 	void shouldCheckIfSeveralConsequtiveOperatorsIsFalse() {
@@ -939,7 +939,7 @@ class CalculatorTest {
 			Calculator calc = new Calculator();
 			
 			// Act/Assert
-			assertFalse (calc.severalConsequtiveOperators("3.91+4%2"));
+			assertFalse (calc.severalConsecutiveOperators("3.91+4%2"));
 	}
 	
 	/**
