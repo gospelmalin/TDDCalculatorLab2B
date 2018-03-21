@@ -2,8 +2,17 @@ package calculator;
 
 import java.util.Scanner;
 
+/**
+ * The class CalculatorUI provides a simple user interface.
+ * @author Malin Albinsson
+ * @version 1.0
+ *
+ */
 public class CalculatorUI {
 
+	/**
+	 * Run UI.
+	 */
 	public static void runUI() {
 		
 		//print welcome message
@@ -36,6 +45,11 @@ public class CalculatorUI {
 					
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		runUI();
 	}	
