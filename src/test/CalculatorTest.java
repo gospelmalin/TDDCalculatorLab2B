@@ -9,7 +9,84 @@ import org.junit.jupiter.api.Test;
 import calculator.Calculator;
 
 class CalculatorTest {
+	
+	@Test
+	void shouldCalculateExpressionWithResultTwentyOne() {
+	// Arrange
+		Calculator calc = new Calculator();
+	// Act
+		String expected="21.0";
+		String actual = calc.calculateExpression("7*6/2");
+	// Assert
+		assertEquals(expected, actual);
+	}
 
+	@Test
+	void shouldCalculateExpressionWithResultEleven() {
+	// Arrange
+		Calculator calc = new Calculator();
+	// Act
+		String expected="11.0";
+		String actual = calc.calculateExpression("5+6/2*2");
+	// Assert
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	void shouldCalculateMoreComplicatedExpressionWithResultTwentyOne() {
+	// Arrange
+	  Calculator calc = new Calculator();
+	// Act
+		String expected="21.0";
+		String actual = calc.calculateExpression("5*4+7-3*0+4-10");
+	// Assert
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	void shouldCalculateExpressionWithResultThirtyTwoAndAHalf() {
+	// Arrange
+	 Calculator calc = new Calculator();
+	// Act
+		String expected="32.5";
+		String actual = calc.calculateExpression("7*4+6-3/2");
+	// Assert
+		assertEquals(expected, actual);		
+	}
+	
+	@Test
+	void shouldCalculateExpressionWithResultMinusOnehundredAndTwo() {
+	// Arrange
+	 Calculator calc = new Calculator();
+	// Act
+		String expected="-102.0";
+		String actual = calc.calculateExpression("1-50*2-3");
+	// Assert
+		assertEquals(expected, actual);		
+	}
+
+	@Test
+	void shouldCalculateModulusExpressionWithResultZero() {
+	// Arrange
+	 Calculator calc = new Calculator();
+	// Act
+		String expected="0.0";
+		String actual = calc.calculateExpression("18%3");
+	// Assert
+		assertEquals(expected, actual);		
+	}
+	
+	@Test
+	void shouldCalculateModulusExpressionWithResultThree() {
+	// Arrange
+	 Calculator calc = new Calculator();
+	// Act
+		String expected="3.0";
+		String actual = calc.calculateExpression("47%4");
+	// Assert
+		assertEquals(expected, actual);		
+	}
+	
 	@Test  // Will need an arrayList of the equation parts
 	void shouldSplitStringIntoOperandsAndNumbersAndPutInArrayList() {  
 		// Arrange
@@ -35,7 +112,11 @@ class CalculatorTest {
 			// Assert
 			assertEquals(expectedArray, resultArray);
 	}
+	
+	
 
+	
+	
 	@Test
 	void shouldCheckIfNumberIsTrue() { // will pass if turns out true
 		// Arrange
@@ -55,7 +136,7 @@ class CalculatorTest {
 			assertFalse (calc.checkIfNumber("+"));
 	}
 	
-	// TODO testa specialfall och gränsvärden för beräkningarna
+
 	@Test
 	void shouldMultiplyTwoValuesGiven() {
 
@@ -67,6 +148,36 @@ class CalculatorTest {
 		
 		// Assert
 		assertEquals(6d, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+	}
+	
+	@Test
+	void shouldAddTwoValuesGivenwithResultMax() {
+		// Arrange
+				Calculator calc = new Calculator();
+				double result = Double.MAX_VALUE; 
+				
+				// Act
+				double operand1 = Double.MAX_VALUE-1;
+				double operand2 = 1;
+				double actual = calc.add(operand1,operand2);
+				
+				// Assert
+				assertEquals(result, actual, 0.111); //
+	}
+	
+	@Test
+	void shouldSubtractTwoValuesGivenwithResultMin() {
+		// Arrange
+				Calculator calc = new Calculator();
+				double result = Double.MIN_VALUE; 
+				
+				// Act
+				double operand1 = Double.MIN_VALUE+1;
+				double operand2 = 1;
+				double actual = calc.subtract(operand1,operand2);
+				
+				// Assert
+				assertEquals(result, actual, 0.111); //
 	}
 
 	@Test
@@ -83,6 +194,8 @@ class CalculatorTest {
 			assertEquals(1.5, actual, 0.111); // TODO vettigare testvärden, använda parameters?
 		
 	}
+	
+	
 	
 	@Test
 	void shouldSubtractTheSecondValueGivenFromTheFirst() {
@@ -559,4 +672,115 @@ class CalculatorTest {
 		// Act/Assert
 		assertFalse (calc.checkIfAnyNonPrioOperators(testArrayList));
 	}
+	
+	@Test
+	void shouldCheckIfHasContentIsTrue() { // will pass if turns out true
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertTrue (calc.hasContent("3+4"));
+
+	}
+	
+	@Test
+	void shouldCheckIfHasContentIsFalse() { // will pass if turns out false
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertFalse (calc.hasContent(null));
+	}
+	
+	@Test 
+	void shouldCheckIfHasStartingNumberIsTrue() { // will pass if turns out true
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertTrue (calc.hasStartingNumber("3+4"));
+
+	}
+	
+	@Test
+	void shouldCheckIfHasStartingNumberIsFalse() { // will pass if turns out false
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertFalse (calc.hasStartingNumber("+3+4"));
+	}
+	
+	@Test
+	void shouldCheckIfhasNumberLastIsTrue() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertTrue (calc.hasNumberLast("3+4"));
+	}
+	
+	@Test
+	void shouldCheckIfhasNumberLastIsFalse() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertFalse (calc.hasNumberLast("3+4*"));
+	}
+	
+	@Test
+	void shouldCheckIfSeveralConsequtiveOperatorsIsTrue() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertTrue (calc.severalConsequtiveOperators("3.91+4*%2"));
+	}
+	
+	@Test
+	void shouldCheckIfSeveralConsequtiveOperatorsIsFalse() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertFalse (calc.severalConsequtiveOperators("3.91+4%2"));
+	}
+	
+	@Test
+	void shouldCheckIfWhitespaceInEquationIsTrue() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertTrue (calc.whitespaceInEquation("3.9+4 *%2"));
+	}
+	
+	@Test
+	void shouldCheckIfWhitespaceInEquationIsFalse() {
+		// Arrange
+			Calculator calc = new Calculator();
+			
+			// Act/Assert
+			assertFalse (calc.whitespaceInEquation("3.91+4%2"));
+	}
+	
+	@Test
+	void shouldCheckIfInvalidContentInEquationIsTrue() {
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		// Act/Assert
+		assertTrue (calc.invalidContentInEquation("a+!-3"));
+	}
+	
+	@Test
+	void shouldCheckIfInvalidContentInEquationIsFalse() {
+		// Arrange
+		Calculator calc = new Calculator();
+		
+		// Act/Assert
+		assertFalse(calc.invalidContentInEquation("20.4-3+5%2/4E1-6/7*8+9"));
+	}
+	
 }

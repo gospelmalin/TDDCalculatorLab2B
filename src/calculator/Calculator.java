@@ -11,8 +11,9 @@ public class Calculator {
 	infixArrayList = new ArrayList<String>();	
 	}
 
-	public String calculateExpression(String equationEntered) {
-
+	public String calculateExpression(String equationEntered) throws IllegalArgumentException, ArithmeticException {
+		validateEquationEntered(equationEntered);
+		
 	    infixArrayList = createInfixArrayListFromString(equationEntered);
 
 	    System.out.println("Now handling equation: " + equationEntered);
@@ -69,6 +70,8 @@ public class Calculator {
 			return infixArrayList;
 			
 		}
+	
+
 
 	/**
 	 * Checks whether the token is a number
@@ -83,28 +86,59 @@ public class Calculator {
 	}
 
 	public double multiply(double a, double b) {
-		return a * b;
+		double result = a * b;
+	    if(result == Double.POSITIVE_INFINITY)
+			throw new ArithmeticException("Overflow exception");
+		  else if(result == Double.NEGATIVE_INFINITY) 
+			  throw new ArithmeticException("Underflow exception");
+	 
+	return result;
+
 		}
 
+	
+		
 		public double divide(double a, double b) {
 			if (b == 0) {
 			//	return 0; // TODO replace with better solution
 			    throw new ArithmeticException("Division with 0 is not allowed");
-			 }
-			return a / b;
+			}  
+			double result = a / b;
+			    if(result == Double.POSITIVE_INFINITY)
+					throw new ArithmeticException("Overflow exception");
+				  else if(result == Double.NEGATIVE_INFINITY) 
+					  throw new ArithmeticException("Underflow exception");
+			 
+			return result;
 		}
 
 		public double subtract(double a, double b) {
-			return a - b;
+			double result = a - b;
+			
+				if(result == Double.NEGATIVE_INFINITY) 
+					  throw new ArithmeticException("Underflow exception");
+				if(result == Double.POSITIVE_INFINITY)
+					throw new ArithmeticException("Overflow exception");
+			return result;
 		}
 
 		public double add(double a, double b) {
-			return a + b;
+			double result = a + b;
+			if(result == Double.POSITIVE_INFINITY)
+				throw new ArithmeticException("Overflow exception");
+			  else if(result == Double.NEGATIVE_INFINITY) 
+				  throw new ArithmeticException("Underflow exception");
+
+			return result;
 		}
 
 		public double modulus(double a, double b) {
-			// TODO kan man ha double på indata här eller blir det fel?
-			return a % b;
+			double result = a % b;
+			if(result == Double.POSITIVE_INFINITY)
+				throw new ArithmeticException("Overflow exception");
+			  else if(result == Double.NEGATIVE_INFINITY) 
+				  throw new ArithmeticException("Underflow exception");
+			return result;
 		}
 
 		public double convertDigitsInStringToNumbers(String stringDigit) {
@@ -224,6 +258,58 @@ public class Calculator {
 			} int firstNonPrioOperatorIndex = operatorIndexArrayList.get(0);
 			return firstNonPrioOperatorIndex;
 		}
-	
+
+		/**
+		 * Checks whether the string has content
+		 */
+		public boolean hasContent(String equationEntered) {
+			if(equationEntered != null && equationEntered.length() > 0) 
+				return true;
+				return false;
+			}
+
+		public boolean hasStartingNumber(String equationEntered) {
+			return equationEntered.matches("^\\d.*"); 
+
+			}
+
+		
+				
+		public boolean hasNumberLast(String equationEntered) {
+		return equationEntered.matches(".*\\d$");
+
+	}
+		
+		public boolean severalConsequtiveOperators(String equationEntered) {
+			return equationEntered.matches("(.*[/*\\-+%][/*\\-+%]+).*");
+		}
+		
+		public boolean whitespaceInEquation(String equationEntered) {
+			return equationEntered.matches("(.*[\\s]+).*");
+
+		}
+		
+		public boolean invalidContentInEquation(String equationEntered) {  //TODO test needed
+			return !equationEntered.matches("([\\d/*\\-+%.E]+)*");
+			
+		}
+
+		private void validateEquationEntered(String equationEntered) {
+		
+		// check for empty string
+		if (!hasContent(equationEntered)) throw new IllegalArgumentException("Equation has no content.");
+		// check that first value of the string represents a number
+		if (!hasStartingNumber(equationEntered)) throw new IllegalArgumentException("Equation does not start with a digit.");
+		// check that last value of the string represents a number
+		if (!hasNumberLast(equationEntered)) throw new IllegalArgumentException("Equation does not end with a digit.");
+		// check if there are more than one consecutive operator
+		if (severalConsequtiveOperators(equationEntered)) throw new IllegalArgumentException("Several consequtive operators in the equation.");
+		// check if the equation contains whitespace
+		if (whitespaceInEquation(equationEntered)) throw new IllegalArgumentException("Whitespace present in the equation.");
+		// check for invalid content in the equation
+		if (invalidContentInEquation(equationEntered)) throw new IllegalArgumentException("Invalid content in equation.");
+		
+		}
+
 		
 }
