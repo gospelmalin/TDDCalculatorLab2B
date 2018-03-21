@@ -10,7 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 import calculator.Calculator;
-
+/**
+ * The class CalculatorTestExceptions holds the unit tests on exception handling.
+ * @author Malin Albinsson
+ * @version 1.0
+ *
+ */
 class CalculatorTestExceptions {
 	
 
@@ -24,10 +29,10 @@ class CalculatorTestExceptions {
 	 @Rule
 	    public ExpectedException thrown = ExpectedException.none();
 
-	@Test
+	@Test //
 	    public void testCheckIfNumberThrowsNumberFormatException() {
 		Calculator calc = new Calculator();
-		 if (calc.checkIfNumber("*") == true);
+		 if (calc.checkIfNumber("*"));
 	        thrown.expect(NumberFormatException.class);
 	     
 	    }
@@ -69,9 +74,59 @@ class CalculatorTestExceptions {
 
 	}
 	
+	@Test 
+	void shouldThrowArithmeticExceptionWhenUnderflowWhenSubtracting() {
+
+		Calculator calc = new Calculator();
+		Double operand2 = 1.0E308;
+		Double operand1 = 0.0-1.0E308; 
+
+		assertThrows(ArithmeticException.class, () -> calc.subtract(operand1,operand2));
+
+	}
 	
+	@Test 
+	void shouldThrowArithmeticExceptionMessageWhenUnderflowWhenSubtracting() {
+
+		Calculator calc = new Calculator();
+		
+		Double operand2 = 1.0E308;
+		Double operand1 = 0.0-1.0E308; 
+
+
+	     Throwable exception = assertThrows(ArithmeticException.class, () -> {
+	        	calc.subtract(operand1,operand2);
+	           });
+	        assertEquals("Underflow exception", exception.getMessage());
+	    }
+		
 	
+	@Test  //underflow 4.9E-324
+	void shouldThrowArithmeticExceptionWhenUnderflowWhenDividing() {
+
+		Calculator calc = new Calculator();
+		Double operand2 = 2.0;
+		Double operand1 = 0-1.0E308-1.0E308; 
+
+
+		assertThrows(ArithmeticException.class, () -> calc.divide(operand1,operand2));
+
+	}
 	
+	@Test 
+	void shouldThrowArithmeticExceptionMessageWhenUnderflowWhenDividing() {
+
+		Calculator calc = new Calculator();
+		
+		Double operand2 = 2.0;
+		Double operand1 = 0-1.0E308-1.0E308;
+
+
+	     Throwable exception = assertThrows(ArithmeticException.class, () -> {
+	        	calc.subtract(operand1,operand2);
+	           });
+	        assertEquals("Underflow exception", exception.getMessage());
+	    }
 	
 	@Test
 	void shouldThrowArithmeticExceptionWhenOverflowWhenMultiplying() {
