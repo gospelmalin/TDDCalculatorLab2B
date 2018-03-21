@@ -19,6 +19,9 @@ import calculator.Calculator;
  */
 class CalculatorTest {
 	
+	/**
+	 * Should calculate expression with result 21
+	 */
 	@Test
 	void shouldCalculateExpressionWithResultTwentyOne() {
 	// Arrange
@@ -30,6 +33,9 @@ class CalculatorTest {
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Should calculate expression with result 11.0.
+	 */
 	@Test
 	void shouldCalculateExpressionWithResultEleven() {
 	// Arrange
@@ -41,6 +47,9 @@ class CalculatorTest {
 		assertEquals(expected, actual);
 	}
 	
+	/**
+	 * Should calculate more complicated expression with result 21.0.
+	 */
 	@Test
 	void shouldCalculateMoreComplicatedExpressionWithResultTwentyOne() {
 	// Arrange
@@ -52,6 +61,9 @@ class CalculatorTest {
 		assertEquals(expected, actual);
 	}
 	
+	/**
+	 * Should calculate expression with result 32.5.
+	 */
 	@Test
 	void shouldCalculateExpressionWithResultThirtyTwoAndAHalf() {
 	// Arrange
@@ -63,6 +75,8 @@ class CalculatorTest {
 		assertEquals(expected, actual);		
 	}
 	
+	/**
+	 * Should calculate expression with result -102.0
 	@Test
 	void shouldCalculateExpressionWithResultMinusOnehundredAndTwo() {
 	// Arrange
@@ -74,6 +88,9 @@ class CalculatorTest {
 		assertEquals(expected, actual);		
 	}
 
+	/**
+	 * Should calculate modulus expression with result zero.
+	 */
 	@Test
 	void shouldCalculateModulusExpressionWithResultZero() {
 	// Arrange
@@ -85,6 +102,9 @@ class CalculatorTest {
 		assertEquals(expected, actual);		
 	}
 	
+	/**
+	 * Should calculate modulus expression with result 3.0.
+	 */
 	@Test
 	void shouldCalculateModulusExpressionWithResultThree() {
 	// Arrange
@@ -96,6 +116,9 @@ class CalculatorTest {
 		assertEquals(expected, actual);		
 	}
 	
+	/**
+	 * Should split string into operands and numbers and put in array list.
+	 */
 	@Test  // Will need an arrayList of the equation parts
 	void shouldSplitStringIntoOperandsAndNumbersAndPutInArrayList() {  
 		// Arrange
@@ -126,6 +149,9 @@ class CalculatorTest {
 
 	
 	
+	/**
+	 * Should check if number is true.
+	 */
 	@Test
 	void shouldCheckIfNumberIsTrue() { // will pass if turns out true
 		// Arrange
@@ -136,6 +162,9 @@ class CalculatorTest {
 
 	}
 	
+	/**
+	 * Should check if number is false.
+	 */
 	@Test
 	void shouldCheckIfNumberIsFalse() { // will pass if turns out false
 		// Arrange
@@ -146,6 +175,9 @@ class CalculatorTest {
 	}
 	
 
+	/**
+	 * Should multiply two values given.
+	 */
 	@Test
 	void shouldMultiplyTwoValuesGiven() {
 
@@ -159,8 +191,11 @@ class CalculatorTest {
 		assertEquals(6d, actual, 0.111); 
 	}
 	
+	/**
+	 * Should add two values given with result max.
+	 */
 	@Test
-	void shouldAddTwoValuesGivenwithResultMax() {
+	void shouldAddTwoValuesGivenWithResultMax() {
 		// Arrange
 				Calculator calc = new Calculator();
 				double result = Double.MAX_VALUE; 
@@ -174,8 +209,11 @@ class CalculatorTest {
 				assertEquals(result, actual, 0.111); //
 	}
 	
+	/**
+	 * Should subtract two values given with result min.
+	 */
 	@Test
-	void shouldSubtractTwoValuesGivenwithResultMin() {
+	void shouldSubtractTwoValuesGivenWithResultMin() {
 		// Arrange
 				Calculator calc = new Calculator();
 				double result = Double.MIN_VALUE; 
@@ -189,9 +227,12 @@ class CalculatorTest {
 				assertEquals(result, actual, 0.111); //
 	}
 
+	/**
+	 * Should divide the first value with the second.
+	 */
 	@Test
 	void shouldDivideTheFirstValueWithTheSecond() {
-		// fail("Not yet implemented"); // TODO 
+
 		// Arrange
 			Calculator calc = new Calculator();
 				
@@ -206,9 +247,11 @@ class CalculatorTest {
 	
 	
 	
+	/**
+	 * Should subtract the second value given from the first.
+	 */
 	@Test
 	void shouldSubtractTheSecondValueGivenFromTheFirst() {
-		// fail("Not yet implemented"); // TODO
 		
 		// Arrange
 			Calculator calc = new Calculator();
@@ -220,9 +263,12 @@ class CalculatorTest {
 			assertEquals(2.5, actual, 0.111); 
 	}
 	
+	/**
+	 * Should add two values given.
+	 */
 	@Test
 	void shouldAddTwoValuesGiven() {
-		// fail("Not yet implemented"); //TODO
+
 		// Arrange
 			Calculator calc = new Calculator();
 						
@@ -233,6 +279,9 @@ class CalculatorTest {
 			assertEquals(7.5, actual, 0.111); 
 	}
 	
+	/**
+	 * Should give modulus from the division.
+	 */
 	@Test
 	void shouldGiveModulusFromTheDivision() {
 
@@ -246,7 +295,10 @@ class CalculatorTest {
 			assertEquals(4, actual, 0.111); 
 			}
 
-	@Test // testa att jag kan konvertera en sträng till ett tal
+	/**
+	 * Should convert digits in string to numbers.
+	 */
+	@Test
 	void shouldConvertDigitsInStringToNumbers() { 
 		// Arrange
 			Calculator calc = new Calculator();
@@ -258,6 +310,11 @@ class CalculatorTest {
 			assertEquals(3.0d, actual, 0.111); 
 	}
 	
+	/**
+	 * Should check that value for method isAnOperator is true for valid operators.
+	 *
+	 * @param stringToTest the string to test
+	 */
 	@ParameterizedTest
 	@ValueSource(strings = { "*", "-","+", "/", "%" })
 	void shouldCheckThatValueForIsAnOperatorIsTrue(String stringToTest) {
@@ -268,6 +325,11 @@ class CalculatorTest {
 	}
 
 
+	/**
+	 * Should check that value for IsAnOperator is false for non-operators.
+	 *
+	 * @param stringToTest the string to test
+	 */
 	@ParameterizedTest
 	@ValueSource(strings = { "*", "-","+", "/", "%" })
 	void shouldCheckThatValueForIsAnOperatorIsFalse(String stringToTest) {
@@ -279,6 +341,11 @@ class CalculatorTest {
 		 
 	}	
 	
+	/**
+	 * Should check that non-operator values for IsAnOperator is false.
+	 *
+	 * @param stringToTest the string to test
+	 */
 	@ParameterizedTest
 	@ValueSource(strings = { "a", "A","abs", "3", "(", "]" })
 	void shouldCheckThatNonOperatorValuesForIsAnOperatorIsFalse(String stringToTest) {
@@ -289,6 +356,11 @@ class CalculatorTest {
 		assertFalse(calc.isOperator(stringToTest)); 
 	}
 
+	/**
+	 * Should check that operatorHasPriority is true.
+	 *
+	 * @param operator the operator
+	 */
 	@ParameterizedTest
 	@ValueSource(strings = { "*", "/", "%" })
 	void shouldCheckThatOperatorHasPriorityIsTrue(String operator) {
@@ -299,6 +371,11 @@ class CalculatorTest {
 	 assertTrue(calc.operatorHasPriority(operator)); 
 	}
 	
+	/**
+	 * Should check that operatorHasPriority is false for minus and plus.
+	 *
+	 * @param operator the operator
+	 */
 	@ParameterizedTest
 	@ValueSource(strings = { "-", "+" })
 	void shouldCheckThatOperatorHasPriorityIsFalseForMinusAndPlus(String operator) {
@@ -309,6 +386,11 @@ class CalculatorTest {
 	 assertFalse(calc.operatorHasPriority(operator)); 
 	}
 
+	/**
+	 * Should check that operatorHasPriority is false for non operators.
+	 *
+	 * @param operator the operator
+	 */
 	@ParameterizedTest
 	@ValueSource(strings = { "a", "A","abs", "3", "(", "]" })
 	void shouldCheckThatOperatorHasPriorityIsFalseForNonOperators(String operator) {
@@ -319,6 +401,9 @@ class CalculatorTest {
 	 assertFalse(calc.operatorHasPriority(operator)); 
 	}
 	
+	/**
+	 * Should perform calculation using performCalculation to add two values given.
+	 */
 	@Test 
 	void shouldPerformCalculationToAddTwoValuesGiven() {
 		// Arrange
@@ -330,6 +415,9 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 
+	/**
+	 * Should perform calculation using performCalculation to subtract second value from first.
+	 */
 	@Test 
 	void shouldPerformCalculationToSubtractSecondValueFromFirst() {
 		// Arrange
@@ -341,6 +429,9 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
+	/**
+	 * Should perform calculation to multiply two values using performCalculation.
+	 */
 	@Test 
 	void shouldPerformCalculationToMultiplyTwoValues() {
 		// Arrange
@@ -352,6 +443,9 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
+	/**
+	 * Should perform calculation to divide the first value with the second using performCalculation.
+	 */
 	@Test 
 	void shouldPerformCalculationToDivideTheFirstValueWithTheSecond() {
 		// Arrange
@@ -363,6 +457,9 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
+	/**
+	 * Should perform calculation to give modulus using performCalculation.
+	 */
 	@Test 
 	void shouldPerformCalculationToGiveModulus() {
 		// Arrange
@@ -374,6 +471,9 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
+	/**
+	 * Should find operand before the operator.
+	 */
 	@Test
 	void shouldFindOperandBeforeTheOperator() {
 		// Arrange
@@ -398,6 +498,9 @@ class CalculatorTest {
 		assertEquals(expectedLeftOperand, actualLeftOperand);
 	}
 	
+	/**
+	 * Should find operand after the operator.
+	 */
 	@Test
 	void shouldFindOperandAfterTheOperator() {
 		// Arrange
@@ -422,6 +525,9 @@ class CalculatorTest {
 		assertEquals(expectedRightOperand, actualRightOperand);
 	}
 	
+	/**
+	 * Should replace operand before operator in infix array list with result.
+	 */
 	@Test
 	void shouldReplaceOperandBeforeOperatorInInfixArrayListWithResult() {
 		// Arrange
@@ -450,6 +556,9 @@ class CalculatorTest {
 		assertEquals(expectedArray, resultArray);
 	}
 	
+	/**
+	 * Should remove operator and operand after from infix array list.
+	 */
 	@Test
 	void shouldRemoveOperatorAndOperandAfterFromInfixArrayList() {
 		// Arrange
@@ -479,6 +588,9 @@ class CalculatorTest {
 		assertEquals(expectedArray, resultArray);
 	}
 	
+	/**
+	 * Should return correct result of simple expression with non prio operator.
+	 */
 	@Test
 	void shouldReturnCorrectResultOfSimpleExpressionWithNonPrioOperator() {
 		// Arrange
@@ -495,6 +607,9 @@ class CalculatorTest {
 				assertEquals(expected, result);
 	}
 	
+	/**
+	 * Should return correct result of simple expression with prio operator.
+	 */
 	@Test
 	void shouldReturnCorrectResultOfSimpleExpressionWithPrioOperator() {
 		// Arrange
@@ -511,6 +626,9 @@ class CalculatorTest {
 				assertEquals(expected, result);
 	}
 	
+	/**
+	 * Should return correct result of expression with both prio and non prio operator.
+	 */
 	@Test
 	void shouldReturnCorrectResultOfExpressionWithBothPrioAndNonPrioOperator() {
 		// Arrange
@@ -528,6 +646,9 @@ class CalculatorTest {
 	}
 	
 	
+	/**
+	 * Should return correct result of complicated expression with both prio and non prio operator.
+	 */
 	@Test
 	void shouldReturnCorrectResultOfComplicatedExpressionWithBothPrioAndNonPrioOperator() {
 		// Arrange
@@ -544,6 +665,9 @@ class CalculatorTest {
 			assertEquals(expected, result);
 	}
 	
+	/**
+	 * Should return correct result of expression with several non prio operator.
+	 */
 	@Test
 	void shouldReturnCorrectResultOfExpressionWithSeveralNonPrioOperator() {
 		// Arrange
@@ -561,6 +685,9 @@ class CalculatorTest {
 	}
 	
 	
+	/**
+	 * Should check if any prio operators is true.
+	 */
 	@Test
 	void shouldCheckIfAnyPrioOperatorsIsTrue() { // will pass if turns out true
 		// Arrange
@@ -583,6 +710,9 @@ class CalculatorTest {
 
 }
 
+	/**
+	 * Should check if any prio operators is false.
+	 */
 	@Test
 	void shouldCheckIfAnyPrioOperatorsIsFalse() { // will pass if turns out false
 	// Arrange
@@ -603,6 +733,9 @@ class CalculatorTest {
 		assertFalse (calc.checkIfAnyPrioOperators(testArrayList));
 }
 	
+	/**
+	 * Should find first prio operator.
+	 */
 	@Test
 	void shouldFindFirstPrioOperator() {
 		// Arrange
@@ -632,6 +765,9 @@ class CalculatorTest {
 	
 	
 
+	/**
+	 * Should find first non prio operator.
+	 */
 	@Test
 	void shouldFindFirstNonPrioOperator() {
 		// Arrange
@@ -660,6 +796,9 @@ class CalculatorTest {
 		}
 		
 
+	/**
+	 * Should check if any no prio operators is true.
+	 */
 	@Test
 	void shouldCheckIfAnyNoPrioOperatorsIsTrue() { // will pass if turns out true
 		// Arrange
@@ -682,6 +821,9 @@ class CalculatorTest {
 
 }
 
+	/**
+	 * Should check if any no prio operators is false.
+	 */
 	@Test
 	void shouldCheckIfAnyNoPrioOperatorsIsFalse() { // will pass if turns out false
 	// Arrange
@@ -702,6 +844,9 @@ class CalculatorTest {
 		assertFalse (calc.checkIfAnyNonPrioOperators(testArrayList));
 	}
 	
+	/**
+	 * Should check if hasContent is true.
+	 */
 	@Test
 	void shouldCheckIfHasContentIsTrue() { // will pass if turns out true
 		// Arrange
@@ -712,6 +857,9 @@ class CalculatorTest {
 
 	}
 	
+	/**
+	 * Should check if hasContent is false.
+	 */
 	@Test
 	void shouldCheckIfHasContentIsFalse() { // will pass if turns out false
 		// Arrange
@@ -721,6 +869,9 @@ class CalculatorTest {
 			assertFalse (calc.hasContent(null));
 	}
 	
+	/**
+	 * Should check if first value is a number is true.
+	 */
 	@Test 
 	void shouldCheckIfHasStartingNumberIsTrue() { // will pass if turns out true
 		// Arrange
@@ -731,6 +882,9 @@ class CalculatorTest {
 
 	}
 	
+	/**
+	 * Should check if first value is a number is false.
+	 */
 	@Test
 	void shouldCheckIfHasStartingNumberIsFalse() { // will pass if turns out false
 		// Arrange
@@ -740,8 +894,11 @@ class CalculatorTest {
 			assertFalse (calc.hasStartingNumber("+3+4"));
 	}
 	
+	/**
+	 * Should check if last value is a number is true.
+	 */
 	@Test
-	void shouldCheckIfhasNumberLastIsTrue() {
+	void shouldCheckIfHasNumberLastIsTrue() {
 		// Arrange
 			Calculator calc = new Calculator();
 			
@@ -749,8 +906,11 @@ class CalculatorTest {
 			assertTrue (calc.hasNumberLast("3+4"));
 	}
 	
+	/**
+	 * Should check if last value is a number is false.
+	 */
 	@Test
-	void shouldCheckIfhasNumberLastIsFalse() {
+	void shouldCheckIfHasNumberLastIsFalse() {
 		// Arrange
 			Calculator calc = new Calculator();
 			
@@ -758,6 +918,9 @@ class CalculatorTest {
 			assertFalse (calc.hasNumberLast("3+4*"));
 	}
 	
+	/**
+	 * Should check if several consequtive operators is true.
+	 */
 	@Test
 	void shouldCheckIfSeveralConsequtiveOperatorsIsTrue() {
 		// Arrange
@@ -767,6 +930,9 @@ class CalculatorTest {
 			assertTrue (calc.severalConsequtiveOperators("3.91+4*%2"));
 	}
 	
+	/**
+	 * Should check if several consequtive operators is false.
+	 */
 	@Test
 	void shouldCheckIfSeveralConsequtiveOperatorsIsFalse() {
 		// Arrange
@@ -776,6 +942,9 @@ class CalculatorTest {
 			assertFalse (calc.severalConsequtiveOperators("3.91+4%2"));
 	}
 	
+	/**
+	 * Should check if whitespace in equation is true.
+	 */
 	@Test
 	void shouldCheckIfWhitespaceInEquationIsTrue() {
 		// Arrange
@@ -785,6 +954,9 @@ class CalculatorTest {
 			assertTrue (calc.whitespaceInEquation("3.9+4 *%2"));
 	}
 	
+	/**
+	 * Should check if whitespace in equation is false.
+	 */
 	@Test
 	void shouldCheckIfWhitespaceInEquationIsFalse() {
 		// Arrange
@@ -794,6 +966,9 @@ class CalculatorTest {
 			assertFalse (calc.whitespaceInEquation("3.91+4%2"));
 	}
 	
+	/**
+	 * Should check if non valid content in equation is true.
+	 */
 	@Test
 	void shouldCheckIfNonValidContentInEquationIsTrue() {
 		// Arrange
@@ -803,6 +978,9 @@ class CalculatorTest {
 		assertTrue (calc.nonValidContentInEquation("a+!-3"));
 	}
 	
+	/**
+	 * Should check if non valid content in equation is false.
+	 */
 	@Test
 	void shouldCheckIfNonValidContentInEquationIsFalse() {
 		// Arrange
