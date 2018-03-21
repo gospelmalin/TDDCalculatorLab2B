@@ -2,7 +2,12 @@ package calculator;
 
 import java.util.ArrayList;
 
-
+/**
+ * The class Calculator holds all methods for calculations in the calculator
+ * @author Malin Albinsson
+ * @version 1.0
+ *
+ */
 public class Calculator {
 	
 	public ArrayList<String> infixArrayList;
@@ -100,7 +105,6 @@ public class Calculator {
 		
 		public double divide(double a, double b) {
 			if (b == 0) {
-			//	return 0; // TODO replace with better solution
 			    throw new ArithmeticException("Division with 0 is not allowed");
 			}  
 			double result = a / b;
@@ -289,7 +293,7 @@ public class Calculator {
 
 		}
 		
-		public boolean invalidContentInEquation(String equationEntered) {  //TODO test needed
+		public boolean nonValidContentInEquation(String equationEntered) { 
 			return !equationEntered.matches("([\\d/*\\-+%.E]+)*");
 			
 		}
@@ -306,8 +310,8 @@ public class Calculator {
 		if (severalConsequtiveOperators(equationEntered)) throw new IllegalArgumentException("Several consequtive operators in the equation.");
 		// check if the equation contains whitespace
 		if (whitespaceInEquation(equationEntered)) throw new IllegalArgumentException("Whitespace present in the equation.");
-		// check for invalid content in the equation
-		if (invalidContentInEquation(equationEntered)) throw new IllegalArgumentException("Invalid content in equation.");
+		// check for non-valid content in the equation
+		if (nonValidContentInEquation(equationEntered)) throw new IllegalArgumentException("Non-valid content in equation.");
 		
 		}
 
