@@ -5,9 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.Calculator;
 
+/**
+ * The class CalculatorTest holds the unit tests on which the Calculator class 
+ * is built. Tests on exception handling are not included in this class.
+ * @author Malin Albinsson
+ * @version 1.0
+ *
+ */
 class CalculatorTest {
 	
 	@Test
@@ -147,7 +156,7 @@ class CalculatorTest {
 		double actual = calc.multiply(3,2);
 		
 		// Assert
-		assertEquals(6d, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+		assertEquals(6d, actual, 0.111); 
 	}
 	
 	@Test
@@ -191,7 +200,7 @@ class CalculatorTest {
 
 				
 		// Assert
-			assertEquals(1.5, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+			assertEquals(1.5, actual, 0.111); 
 		
 	}
 	
@@ -208,7 +217,7 @@ class CalculatorTest {
 			double actual = calc.subtract(5,2.5);
 				
 		// Assert
-			assertEquals(2.5, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+			assertEquals(2.5, actual, 0.111); 
 	}
 	
 	@Test
@@ -221,12 +230,12 @@ class CalculatorTest {
 			double actual = calc.add(5,2.5);
 						
 		// Assert
-			assertEquals(7.5, actual, 0.111); // TODO vettigare testvärden, använda parameters?	
+			assertEquals(7.5, actual, 0.111); 
 	}
 	
 	@Test
 	void shouldGiveModulusFromTheDivision() {
-		// fail("Not yet implemented"); // TODO
+
 		// Arrange
 			Calculator calc = new Calculator();
 								
@@ -234,11 +243,11 @@ class CalculatorTest {
 			double actual = calc.modulus(14,5);
 								
 		// Assert
-			assertEquals(4, actual, 0.111); // TODO vettigare testvärden, använda parameters?	
+			assertEquals(4, actual, 0.111); 
 			}
 
-	@Test
-	void shouldConvertDigitsInStringToNumbers() { // testa att jag kan konvertera en sträng till ett tal
+	@Test // testa att jag kan konvertera en sträng till ett tal
+	void shouldConvertDigitsInStringToNumbers() { 
 		// Arrange
 			Calculator calc = new Calculator();
 			
@@ -246,50 +255,71 @@ class CalculatorTest {
 			double actual = calc.convertDigitsInStringToNumbers("3.0");
 			
 			// Assert
-			assertEquals(3.0d, actual, 0.111); // TODO vettigare testvärden, använda parameters?
+			assertEquals(3.0d, actual, 0.111); 
 	}
 	
-	@Test //TODO need to check all values, use parameters?
-	void shouldCheckThatValueIsAnOperatorIsTrue() {
+	@ParameterizedTest
+	@ValueSource(strings = { "*", "-","+", "/", "%" })
+	void shouldCheckThatValueForIsAnOperatorIsTrue(String stringToTest) {
 		// Arrange
-			 	Calculator calc = new Calculator();
-			 // Act
-				String stringToTest="+";
-			 // Assert
-			 assertTrue(calc.isOperator(stringToTest)); 
+			 Calculator calc = new Calculator();
+		// Assert
+		 assertTrue(calc.isOperator(stringToTest)); 
 	}
+
+
+	@ParameterizedTest
+	@ValueSource(strings = { "*", "-","+", "/", "%" })
+	void shouldCheckThatValueForIsAnOperatorIsFalse(String stringToTest) {
+		// Arrange
+			 Calculator calc = new Calculator();
+
+		// Act/Assert
+		 assertFalse(!calc.isOperator(stringToTest)); 
+		 
+	}	
 	
-	@Test
-	void shouldCheckThatValueIsAnOperatorIsTrueFalse() {
+	@ParameterizedTest
+	@ValueSource(strings = { "a", "A","abs", "3", "(", "]" })
+	void shouldCheckThatNonOperatorValuesForIsAnOperatorIsFalse(String stringToTest) {
 		// Arrange
 	 	Calculator calc = new Calculator();
-		// Act
-		String stringToTest ="a";
-		// Assert
+
+		// Act/Assert
 		assertFalse(calc.isOperator(stringToTest)); 
 	}
 
-	@Test //TODO need to check all values, use parameters?
-	void shouldCheckThatOperatorHasPriorityIsTrue() {
+	@ParameterizedTest
+	@ValueSource(strings = { "*", "/", "%" })
+	void shouldCheckThatOperatorHasPriorityIsTrue(String operator) {
 		// Arrange
 	 	Calculator calc = new Calculator();
-	 // Act
-		String operator="*";
+
 	 // Assert
 	 assertTrue(calc.operatorHasPriority(operator)); 
 	}
-
-	@Test //TODO need to check all values, use parameters?
-	void shouldCheckThatOperatorHasPriorityIsFalse() {
+	
+	@ParameterizedTest
+	@ValueSource(strings = { "-", "+" })
+	void shouldCheckThatOperatorHasPriorityIsFalseForMinusAndPlus(String operator) {
 		// Arrange
 	 	Calculator calc = new Calculator();
-	 // Act
-		String operator="-";
+
+	 // Assert
+	 assertFalse(calc.operatorHasPriority(operator)); 
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "a", "A","abs", "3", "(", "]" })
+	void shouldCheckThatOperatorHasPriorityIsFalseForNonOperators(String operator) {
+		// Arrange
+	 	Calculator calc = new Calculator();
+
 	 // Assert
 	 assertFalse(calc.operatorHasPriority(operator)); 
 	}
 	
-	@Test //TODO kontrollera gränsfall, special cases
+	@Test 
 	void shouldPerformCalculationToAddTwoValuesGiven() {
 		// Arrange
 		Calculator calc = new Calculator();
@@ -300,7 +330,7 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 
-	@Test //TODO kontrollera gränsfall, special cases
+	@Test 
 	void shouldPerformCalculationToSubtractSecondValueFromFirst() {
 		// Arrange
 		Calculator calc = new Calculator();
@@ -311,7 +341,7 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
-	@Test //TODO kontrollera gränsfall, special cases
+	@Test 
 	void shouldPerformCalculationToMultiplyTwoValues() {
 		// Arrange
 		Calculator calc = new Calculator();
@@ -322,7 +352,7 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
-	@Test //TODO kontrollera gränsfall, special cases //TODO division with 0
+	@Test 
 	void shouldPerformCalculationToDivideTheFirstValueWithTheSecond() {
 		// Arrange
 		Calculator calc = new Calculator();
@@ -333,7 +363,7 @@ class CalculatorTest {
 		assertEquals(expected, actual, 0.111);
 	}
 	
-	@Test //TODO kontrollera gränsfall, special cases
+	@Test 
 	void shouldPerformCalculationToGiveModulus() {
 		// Arrange
 		Calculator calc = new Calculator();
@@ -450,7 +480,6 @@ class CalculatorTest {
 	}
 	
 	@Test
-//something not good enough within method, makes test halt
 	void shouldReturnCorrectResultOfSimpleExpressionWithNonPrioOperator() {
 		// Arrange
 				Calculator calc = new Calculator();
@@ -766,21 +795,21 @@ class CalculatorTest {
 	}
 	
 	@Test
-	void shouldCheckIfInvalidContentInEquationIsTrue() {
+	void shouldCheckIfNonValidContentInEquationIsTrue() {
 		// Arrange
 		Calculator calc = new Calculator();
 		
 		// Act/Assert
-		assertTrue (calc.invalidContentInEquation("a+!-3"));
+		assertTrue (calc.nonValidContentInEquation("a+!-3"));
 	}
 	
 	@Test
-	void shouldCheckIfInvalidContentInEquationIsFalse() {
+	void shouldCheckIfNonValidContentInEquationIsFalse() {
 		// Arrange
 		Calculator calc = new Calculator();
 		
 		// Act/Assert
-		assertFalse(calc.invalidContentInEquation("20.4-3+5%2/4E1-6/7*8+9"));
+		assertFalse(calc.nonValidContentInEquation("20.4-3+5%2/4E1-6/7*8+9"));
 	}
 	
 }
